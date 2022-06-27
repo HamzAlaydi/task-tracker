@@ -21,4 +21,12 @@ export class TaskService {
     return this.http.delete<ITask>(elementUrl);
   }
 
+  updateTaskReminder(task:ITask):Observable<ITask>{
+    const elementUrl = `${this._URL}/${task.id}`;
+    return this.http.put<ITask>(elementUrl,task);    
+  }
+  addTask(task :ITask):Observable<ITask>{
+    const elementUrl = `${this._URL}`;
+    return this.http.post<ITask>(elementUrl, task);
+  }
 }

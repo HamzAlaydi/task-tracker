@@ -18,8 +18,22 @@ export class TasksComponent implements OnInit {
     this._tasksService.getTasks().subscribe((data) => (this.tasks = data));
   }
 
+  setReminder(task: ITask) {
+    task.reminder = !task.reminder;
+    this._taskService.updateTaskReminder(task).subscribe(data=>console.log(data)
+    );
+  }
+
   public deleteTask = (task: ITask) => {
-    this._taskService.deleteTask(task).subscribe(() =>
-     this.tasks = this.tasks.filter(t =>t.id !== task.id))
+    this._taskService
+      .deleteTask(task)
+      .subscribe(
+        () => (this.tasks = this.tasks.filter((t) => t.id !== task.id))
+      );
   };
+
+  public addTask(task:ITask){
+    this._taskService.addTask(task).subscribe(task=>this.tasks.push(task  ))
+    
+  }
 }
